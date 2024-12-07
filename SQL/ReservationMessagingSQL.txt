@@ -1,0 +1,35 @@
+Create table reservations (
+	rid int NOT NULL auto_increment,
+    username varchar(50),
+    total_cost real NOT NULL,
+    origin int,
+    destination int,
+    schedule_num int,
+class enum('Business','First','Economy') NOT NULL,
+	date_ticket date NOT NULL,
+    date_reserved date NOT NULL,
+    booking_fee real NOT NULL,
+    discount enum('Disabled', 'Senior/Child', 'Normal') NOT NULL,
+	trip enum('Round', 'One', 'Monthly', 'Weekly') NOT NULL,
+    Primary Key (rid), 
+    Foreign Key (`schedule_num`) references `train_schedule_assignment` (`schedule_num`) on delete cascade,
+    Foreign Key(`origin`) references `station` (`station_id`), 
+    Foreign Key(`destination`) references `station`(`station_id`), 
+    FOREIGN KEY (`username`) REFERENCES `users` (`username`) on delete cascade
+); 
+
+
+CREATE TABLE `messaging` (
+	`mid` int NOT NULL AUTO_INCREMENT,
+	`user` varchar(50),
+    `subject` varchar(150),
+	`content` TEXT,
+    `admin` varchar(50),
+	`answer` TEXT,
+	PRIMARY KEY(`mid`),
+	FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE,
+    FOREIGN KEY (`admin`) REFERENCES `users`(`username`) ON DELETE CASCADE
+);
+
+
+INSERT INTO `reservations` VALUES (1,'kv401',83.0,19,27,1008,'Economy','2024-12-07','2024-09-07',5.5,'Normal','Round');

@@ -7,96 +7,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Group 7</title>
-		<!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutgers Train System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        body {
-            background: linear-gradient(120deg, #2980b9, #8e44ad);
-            height: 100vh;
+        /* Custom styles for the banner */
+        .banner {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
         
-        .login-container {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            max-width: 400px;
-            width: 90%;
-            margin: auto;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
+        .navbar {
+            margin-top: 10px;
         }
-        
-        .train-icon {
-            font-size: 3rem;
-            color: #2980b9;
-            margin-bottom: 1rem;
+
+        .navbar-nav .nav-link {
+            color: #0056b3 !important;
         }
-        
-        .form-control {
-            border-radius: 25px;
-            padding: 0.75rem 1.5rem;
-            margin-bottom: 1rem;
-            border: 2px solid #e3e3e3;
-            transition: all 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: #2980b9;
-            box-shadow: 0 0 10px rgba(41, 128, 185, 0.2);
-        }
-        
-        .btn-login {
-            border-radius: 25px;
-            padding: 0.75rem 2rem;
-            font-weight: bold;
-            background: linear-gradient(to right, #2980b9, #3498db);
-            border: none;
-            transition: all 0.3s;
-        }
-        
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(41, 128, 185, 0.4);
-        }
-        
-        .register-link {
-            color: #2980b9;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .register-link:hover {
-            color: #8e44ad;
-        }
-        
-        .input-group-text {
-            border-radius: 25px 0 0 25px;
-            background: transparent;
-            border-right: none;
-        }
-        
-        .input-group .form-control {
-            border-radius: 0 25px 25px 0;
-            border-left: none;
-        }
-        
-        .alert {
-            border-radius: 25px;
-            padding: 1rem;
-            margin-bottom: 1rem;
+
+        .navbar-nav .nav-link:hover {
+            color: #003366 !important;
         }
     </style>
-		
 	</head>
 	
 	<body>
+	
+	<div class="banner">
+        <h1>Rutgers Train System</h1>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+       <!--      <a class="navbar-brand" href="#">CS527 Group 7</a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.jsp">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resPage.jsp">Reserve</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.jsp">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+	
 		<center><h1>Login</h1>	  
 		<br>
 		<form method="post" action="credCheck.jsp">
