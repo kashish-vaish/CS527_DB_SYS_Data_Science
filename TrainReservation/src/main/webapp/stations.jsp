@@ -67,6 +67,30 @@
     </style>
 </head>
 <body>
+    <div class="banner">
+        <h1>Rutgers Train System</h1>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.jsp">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reserve.jsp">Reserve</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.jsp">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav><body>
 	<%
 	ApplicationDB db = new ApplicationDB();	
 	Connection con = db.getConnection();
@@ -107,8 +131,6 @@
 			));
 	db.closeConnection(con);
 	%>
-	<button style="background-color: green; position:absolute; top:20px; left: 30px; border-radius: 10px;"><a style="color: black; text-decoration: none; font-size: 20px;"href="Home.jsp">Home</a></button>
-	<button style="background-color: red; position:absolute; top:20px; right: 30px; border-radius: 10px;"><a style="color: black; text-decoration: none; font-size: 20px;"href="logout.jsp">Logout</a></button>
 	<h3 style="text-align:center"> Station Schedule for <%=transitLine%> #<%=scheduleNum%></h3>
 	<div style="display: flex; justify-content:center;" >
 	<table style="border: 1px solid black; border-collapse: collapse;" >
