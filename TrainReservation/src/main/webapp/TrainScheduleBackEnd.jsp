@@ -135,23 +135,23 @@
 				ps.setString(1,origin);
 			    rs = ps.executeQuery();*/
 			    
-			    statement = "select schedule_num, min(departure_time) as departure, max(arrival_time) as arrival, SUBTIME(max(arrival_time), min(departure_time)) as travel_time,"
-			    		+"min(fare)*(max(hop_number) - min(hop_number)+1) as cost"
-			    		 +"from ("
-			    		+"SELECT tl.tl_name, r.route_id, ts.schedule_num, t.train_id, ? start, ? end,"
-			    		+"ts.departure_time, ts.arrival_time, tl.fare, r.hop_number from transit_line_route r," 
-			    		+"station s1, station s2, train_schedule_timings ts, transit_line tl, train_schedule_assignment ta, train t"
-			    		+"where r.start_station_id = s1.station_id and r.end_station_id = s2.station_id and ts.route_id = r.route_id" 
-			    		+"and r.tl_id = tl.tl_id and ta.schedule_num = ts.schedule_num and ta.train_id = t.train_id "
-			    		+"and (s1.name = ? or s2.name = ?)"
-			    		+"and direction = ?"
-			    		+"and t.number_of_seats > ( Select count(*) from reservations rr where ta.schedule_num = rr.schedule_num)"
-			    		+"and tl.tl_name in ("
-			    		+"SELECT distinct tl1.tl_name from transit_line tl1, transit_line_route r, station s where tl1.tl_id = r.tl_id and r.start_station_id = s.station_id and s.name=?"
-			    		+"AND EXISTS ("
-			    		+"SELECT tl2.tl_name from transit_line tl2, transit_line_route r, station s where tl2.tl_id = r.tl_id and r.start_station_id = s.station_id and s.name=? and tl2.tl_name=tl1.tl_name)"
-			    		+"))a"
-			    		+ "group by schedule_num order by min(departure_time), max(arrival_time);";
+			    statement = "select route_id, tl_name, schedule_num, min(departure_time) as departure, max(arrival_time) as arrival, ? start, ? end, SUBTIME(max(arrival_time), min(departure_time)) as travel_time,"
+			    		+" min(fare)*(max(hop_number) - min(hop_number)+1) as cost"
+			    		 +" from ("
+			    		+" SELECT tl.tl_name, r.route_id, ts.schedule_num, t.train_id, "
+			    		+" ts.departure_time, ts.arrival_time, tl.fare, r.hop_number from transit_line_route r," 
+			    		+" station s1, station s2, train_schedule_timings ts, transit_line tl, train_schedule_assignment ta, train t"
+			    		+" where r.start_station_id = s1.station_id and r.end_station_id = s2.station_id and ts.route_id = r.route_id" 
+			    		+" and r.tl_id = tl.tl_id and ta.schedule_num = ts.schedule_num and ta.train_id = t.train_id "
+			    		+" and (s1.name = ? or s2.name = ?)"
+			    		+" and direction = ?"
+			    		+" and t.number_of_seats > ( Select count(*) from reservations rr where ta.schedule_num = rr.schedule_num)"
+			    		+" and tl.tl_name in ("
+			    		+" SELECT distinct tl1.tl_name from transit_line tl1, transit_line_route r, station s where tl1.tl_id = r.tl_id and r.start_station_id = s.station_id and s.name=?"
+			    		+" AND EXISTS ("
+			    		+" SELECT tl2.tl_name from transit_line tl2, transit_line_route r, station s where tl2.tl_id = r.tl_id and r.start_station_id = s.station_id and s.name=? and tl2.tl_name=tl1.tl_name)"
+			    		+" ))a"
+			    		+  " group by route_id, tl_name, schedule_num order by min(departure_time), max(arrival_time);";
 			
 			    		 
 			    ps = con.prepareStatement(statement);		 
@@ -162,7 +162,6 @@
 			    ps.setString(5,direction);
 			    ps.setString(6,origin);
 			    ps.setString(7,destination);
-			    System.out.println(statement);
 			    rs = ps.executeQuery();
 	    	}
 			ArrayList<TrainScheduleObject> list = new ArrayList<TrainScheduleObject>();

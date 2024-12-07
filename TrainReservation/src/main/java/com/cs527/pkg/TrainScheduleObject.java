@@ -27,7 +27,6 @@ public class TrainScheduleObject {
 		return transitLine + "\t" + trainId + "\t" + departure + "\t" + arrival + "\t" + start + "\t" + end + "\t" + travelTime;
 	}
 	public String getData(String personType) {
-		System.out.println("HEYYY");
 		String html = "<td style=\"border: 1px solid black;\">" 
 				+"<a href='stations.jsp?transit="+transitLine+"&num="+scheduleNum+"'>"+ transitLine + "</a></td>"+
 				"<td style=\"border: 1px solid black;\">#" + scheduleNum + "</td>"+
