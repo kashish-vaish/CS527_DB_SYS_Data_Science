@@ -28,6 +28,60 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 	
 	<link href="css/styles.css" rel="stylesheet">
+	<style>
+        .banner {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .navbar {
+            margin-top: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #0056b3 !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #003366 !important;
+        }
+
+        .card {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+
+        .filter-form {
+            padding: 20px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup {
+            margin: 70px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            width: 80%;
+            position: relative;
+            max-width: 600px;
+        }
+    </style>
 </head>
 <body>
     <%@ include file="header.jsp" %>
