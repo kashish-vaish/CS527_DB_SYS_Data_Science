@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="com.cs527.pkg.*"%>
+	pageEncoding="ISO-8859-1" import="com.cs527.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
+<%
+    String username = (String) session.getAttribute("user");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +15,9 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         /* Custom styles for the banner */
@@ -24,7 +30,7 @@
             background-size: cover;
             background-position: center;
         }
-
+        
         .banner h1 {
             font-family: 'Roboto', sans-serif;
             font-size: 3rem;
@@ -44,34 +50,28 @@
             color: #003366 !important;
         }
 
-        /* Form Styling */
-        .login-form {
-            max-width: 400px;
-            margin: 50px auto;
+        /* Card Styles */
+        .feature-card {
             background-color: #f8f9fa;
-            padding: 30px;
+            border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
-        .login-form h2 {
-            margin-bottom: 20px;
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card .card-body {
+            padding: 30px;
             text-align: center;
         }
 
-        .login-form .form-group {
-            margin-bottom: 20px;
-        }
-
-        .login-form .btn-primary {
-            width: 100%;
-        }
-
-        .error-message {
-            color: red;
-            text-align: center;
+        .feature-card .card-title {
+            font-size: 1.5rem;
             font-weight: bold;
-            margin-top: 20px;
         }
 
         /* Footer Styles */
@@ -94,8 +94,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Banner Section -->
     <div class="banner">
         <h1>Rutgers Train System</h1>
                 <h2>Group 7</h2>
@@ -118,42 +116,79 @@
                     <li class="nav-item">
                         <a class="nav-link" href="login.jsp">Login</a>
                     </li>
+                    <% if (username != null) { %>
+                        <li class="nav-item">
+                            <span class="nav-link">Welcome, <%= username %>!</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="logout.jsp">Logout</a>
+                        </li>
+                    <% } %>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Login Form Section -->
-    <div class="login-form">
-        <h2>Login</h2>
-        <form method="post" action="credCheck.jsp">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" name="username" id="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
 
-            <% if (request.getParameter("error") != null) { %>
-                <div class="error-message">
-                    Incorrect username/password, Login failed!
+   <div class="container my-5">
+    <div class="row text-center">
+        <!-- First pair of cards -->
+        <div class="col-md-6">
+            <div class="card feature-card">
+                <div class="card-body">
+                    <h5 class="card-title">Kashish Vaish</h5>
+                    <p class="card-text">kv401@scarletmail.rutgers.edu</p>
                 </div>
-            <% } %>
-        </form>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="card feature-card">
+                <div class="card-body">
+                    <h5 class="card-title">Pranika Massey</h5>
+                    <p class="card-text">pranika@scarletmail.rutgers.edu</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second pair of cards -->
+        <div class="col-md-6">
+            <div class="card feature-card">
+                <div class="card-body">
+                    <h5 class="card-title">Weihao Song</h5>
+                    <p class="card-text">ws479@scarletmail.rutgers.edu</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card feature-card">
+                <div class="card-body">
+                    <h5 class="card-title">Ziyu Lin</h5>
+                    <p class="card-text">zl711a@scarletmail.rutgers.edu</p>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
     <!-- Footer -->
-    <footer>
+<div class="footer-banner d-flex justify-content-center align-items-center py-4" style="background-color: #0056b3; color: white; position: fixed; bottom: 0; width: 100%; z-index: 10;">
+    <div class="text-center">
+        <h2>Rutgers Transit</h2>
+        <p>Way to Go</p>
+    </div>
+</div>
+
+<div style="padding-bottom: 30px;"> 
+    <!-- Your page content here -->
+</div>
+<!-- Footer -->
+<footer class="py-3 bg-light mt-5">
+    <div class="container text-center">
         <p>&copy; 2024 Group 07 Train Reservation System. All Rights Reserved.</p>
         <p><a href="contact.jsp">Contact Us</a> | <a href="about.jsp">About Us</a></p>
-    </footer>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
+    </div>
+</footer>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Train Schedule</title>
 </head>
 <body>
 	<%
@@ -16,7 +16,7 @@
 	// check direction
 	// check route_id
 	// query for route_id in schedule timings
-	
+	    String referer = (String) session.getAttribute("referer");
 	if (request.getParameter("clear") != null && request.getParameter("clear").equals("true")){
 		session.removeAttribute("data");
 		session.removeAttribute("direction");
@@ -25,7 +25,7 @@
 		session.removeAttribute("direction");
 		session.removeAttribute("date");
 		session.removeAttribute("t_error");
-		response.sendRedirect("Home.jsp");
+		response.sendRedirect("index.jsp");
 	}
 	else if (request.getParameter("clear") != null && request.getParameter("clear").equals("manage")){
 		session.removeAttribute("data");
@@ -35,8 +35,9 @@
 		session.removeAttribute("direction");
 		session.removeAttribute("date");
 		session.removeAttribute("t_error");
-		response.sendRedirect("manageTrainSchedule.jsp");
+		response.sendRedirect("myBookings.jsp");
 	}
+
 	else if (request.getParameter("trip") != null){
 		session.removeAttribute("data");
 		session.removeAttribute("direction");
@@ -44,7 +45,7 @@
 		session.setAttribute("trip", request.getParameter("trip"));
 		session.setAttribute("class", request.getParameter("class"));
 		session.setAttribute("username", request.getParameter("username"));
-		response.sendRedirect("resPage.jsp");
+		response.sendRedirect("reserve.jsp");
 	}
 	else{
 	if (request.getParameter("date") == null || request.getParameter("origin") == null || request.getParameter("destination") == null || request.getParameter("date") == "" || request.getParameter("origin") == "" || request.getParameter("destination") == ""){
@@ -193,7 +194,7 @@
         }
 			response.sendRedirect("reserve.jsp");  
 	}
-	
+
 	%>
 </body>
 </html>

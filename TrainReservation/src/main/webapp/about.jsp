@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" import="com.cs527.pkg.*"%>
+    pageEncoding="ISO-8859-1" import="com.cs527.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 
@@ -50,28 +50,21 @@
             color: #003366 !important;
         }
 
-        /* Card Styles */
-        .feature-card {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+        /* Member Section */
+        .member-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 15px;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        .member-section {
+            margin-top: 30px;
         }
 
-        .feature-card .card-body {
-            padding: 30px;
+        .member-card {
             text-align: center;
-        }
-
-        .feature-card .card-title {
-            font-size: 1.5rem;
-            font-weight: bold;
+            margin-bottom: 30px;
         }
 
         /* Footer Styles */
@@ -94,9 +87,10 @@
     </style>
 </head>
 <body>
+    <!-- Banner Section -->
     <div class="banner">
         <h1>Rutgers Train System</h1>
-        <h2>Group 7</h2>
+                <h2>Group 7</h2>
     </div>
 
     <!-- Navigation Menu -->
@@ -129,65 +123,74 @@
         </div>
     </nav>
 
-    <!-- Feature Section -->
+    <!-- About Us Section -->
     <div class="container my-5">
         <div class="row text-center">
-            <div class="col-md-4">
-                <div class="card feature-card">
-              <!--       <img src="https://source.unsplash.com/500x300/?train-station" class="card-img-top" alt="Train Station"> -->
-                    <div class="card-body">
-                        <h5 class="card-title">Train Reservations</h5>
-                        <p class="card-text">Easily reserve tickets for your next trip.</p>
-                        <a href="reserve.jsp" class="btn btn-primary">Reserve Now</a>
-                    </div>
-                </div>
+            <!-- Section Title -->
+            <div class="col-12">
+                <h2 class="display-4 mb-4" style="color: #0056b3;">About Us</h2>
+                <p class="lead">Learn more about our project and the team behind it.</p>
             </div>
-            <div class="col-md-4">
-                <div class="card feature-card">
-               <!--      <img src="https://source.unsplash.com/500x300/?railroad" class="card-img-top" alt="Railroad"> -->
-                    <div class="card-body">
-                        <h5 class="card-title">Explore Routes</h5>
-                        <p class="card-text">Discover the best routes available for your journey.</p>
-                        <a href="routes.jsp" class="btn btn-primary">Explore Routes</a>
-                    </div>
-                </div>
+        </div>
+
+        <!-- Team Introduction Section -->
+        <div class="row member-section">
+            <!-- Team Member 1 -->
+            <div class="col-md-3 member-card">
+                <img src="kv401.jpg" alt="Kashish Vaish" class="member-img">
+                <h4>Kashish Vaish</h4>
+                <p>kv401@scarletmail.rutgers.edu</p>
             </div>
-            <div class="col-md-4">
-                <div class="card feature-card">
-           <!--          <img src="https://source.unsplash.com/500x300/?train-passenger" class="card-img-top" alt="Passenger Train"> -->
-                    <div class="card-body">
-                     <% if (username == null) { %>
-                        <h5 class="card-title">Passenger Login</h5>
-                        <p class="card-text">Sign in to access your booking history and more.</p>
-                        <a href="login.jsp" class="btn btn-primary">Login</a>
-                      <% } else { %>
-                <h5 class="card-title">My Bookings</h5>
-                <p class="card-text">View your booking history and manage your reservations.</p>
-                <a href="myBookings.jsp" class="btn btn-primary">View My Bookings</a>
-            <% } %>  
-                    </div>
-                </div>
+        
+            <!-- Team Member 2 -->
+            <div class="col-md-3 member-card">
+                <img src="https://via.placeholder.com/150" alt="Pranika Massey" class="member-img">
+                <h4>Pranika Massey</h4>
+                <p>pranika@scarletmail.rutgers.edu</p>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="col-md-3 member-card">
+                <img src="https://via.placeholder.com/150" alt="Weihao Song" class="member-img">
+                <h4>Weihao Song</h4>
+                <p>ws479@scarletmail.rutgers.edu</p>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="col-md-3 member-card">
+                <img src="https://via.placeholder.com/150" alt="Ziyu Lin" class="member-img">
+                <h4>Ziyu Lin</h4>
+                <p>zl711a@scarletmail.rutgers.edu</p>
+            </div>
+        </div>
+
+        <!-- Project Description Section -->
+        <div class="row text-center">
+            <div class="col-12">
+                <h3 class="display-5" style="color: #0056b3;">Project Overview</h3>
+                <p class="lead mb-4">This website is built as part of the submission by Group 7 for the final project of CS 527 - Database Systems for Data Science. Our goal is to create an efficient and user-friendly train reservation system for the Rutgers community.</p>
+                <p class="mb-4">The system allows users to easily reserve tickets, explore routes, and manage bookings. We utilized a variety of technologies and databases to ensure a smooth and intuitive user experience.</p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-<div class="footer-banner d-flex justify-content-center align-items-center py-4" style="background-color: #0056b3; color: white; position: fixed; bottom: 0; width: 100%; z-index: 10;">
-    <div class="text-center">
-        <h2>Rutgers Transit</h2>
-        <p>Way to Go</p>
+    <!-- Footer Banner Section -->
+    <div class="footer-banner d-flex justify-content-center align-items-center py-2" style="background-color: #0056b3; color: white; position: fixed; bottom: 0; width: 100%; z-index: 10;">
+        <div class="text-center">
+            <h2>Rutgers Transit</h2>
+            <p>Way to Go</p>
+        </div>
     </div>
-</div>
 
-<div style="padding-bottom: 50px;"> <!-- Adds space for the fixed footer to not overlap content -->
-    <!-- Your page content here -->
-</div>
-<!-- Footer -->
-<footer class="py-3 bg-light mt-5">
-    <div class="container text-center">
-        <p>&copy; 2024 Group 07 Train Reservation System. All Rights Reserved.</p>
-        <p><a href="contact.jsp">Contact Us</a> | <a href="about.jsp">About Us</a></p>
-    </div>
-</footer>
+    <!-- Footer Section -->
+    <footer class="py-3 bg-light mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 Group 07 Train Reservation System. All Rights Reserved.</p>
+            <p><a href="contact.jsp">Contact Us</a> | <a href="about.jsp">About Us</a></p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (optional for interactive elements) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

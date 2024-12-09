@@ -5,20 +5,11 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.text.DateFormat" %>
-
 <%
-    // Check if the user is logged in
     String username = (String) session.getAttribute("user");
-    if (username == null) {
-        // If not logged in, redirect to login page
-        String referer = request.getRequestURI(); 
-        session.setAttribute("referer", referer);
-        response.sendRedirect("login.jsp");
-        return;
-    }
-
+String referer = request.getRequestURI(); 
+session.setAttribute("referer", referer);
 %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,9 +76,9 @@
     </style>
 </head>
 <body>
-  <div class="banner">
+<div class="banner">
     <h1>Rutgers Train System</h1>
-            <h2>Group 7</h2>
+    <h2>Group 7</h2>
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -106,19 +97,18 @@
             </ul>
             <!-- Add a flex container to push the username and logout to the right -->
             <ul class="navbar-nav ms-auto"> <!-- ms-auto is equivalent to ml-auto in Bootstrap 5 -->
-                <% if (username != null) { %>
+                 <% if (username != null) { %>
                     <li class="nav-item">
                         <span class="nav-link">Welcome, <%= username %>!</span>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.jsp">Logout</a>
                     </li>
-                <% } %>
+                <% } %> 
             </ul>
         </div>
     </div>
 </nav>
-  
 
     <div class="container">
         <div class="card">
@@ -201,7 +191,6 @@
                                     <th>End Station</th>
                                     <th>Travel Time</th>
                                     <th>Cost</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -215,103 +204,30 @@
                     </div>
                 <% } %>
 
-                <% if (request.getParameter("fare") != null) { %>
-                    <div id="popup1" class="overlay">
-                        <div class="popup">
-                            <% 
-                                session.setAttribute("r_fare", request.getParameter("fare"));
-                                session.setAttribute("schedule", request.getParameter("schedule"));
-                            %>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="mb-0">Select Ticket Information</h3>
-                                </div>
-                                <div class="card-body">
-                                    <p><strong>Date:</strong> <%= session.getAttribute("date") %></p>
-                                    <p><strong>Train Number:</strong> <%= request.getParameter("schedule") %></p>
-                                    <p><strong>Origin:</strong> <%= session.getAttribute("origin") %></p>
-                                    <p><strong>Destination:</strong> <%= session.getAttribute("destination") %></p>
-
-                                    <form action=resBook.jsp class="mt-4">
-                                        <% if (!personType.equals("customer")) { %>
-                                            <div class="mb-3">
-                                                <label class="form-label"><strong>Select User:</strong></label>
-                                                <select name="username" class="form-select">
-                                                    <% for (String s : users) { %>
-                                                        <option value="<%= s %>"><%= s %></option>
-                                                    <% } %>
-                                                </select>
-                                            </div>
-                                        <% } %>
-
-                                        <div class="mb-3">
-                                            <label class="form-label"><strong>Ticket Type:</strong></label>
-                                            <div class="form-check">
-                                                <input type="radio" id="one" name="trip" value="One" checked class="form-check-input">
-                                                <label class="form-check-label" for="one">One-Way</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="two" name="trip" value="Round" class="form-check-input">
-                                                <label class="form-check-label" for="two">Round-Trip</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="weekly" name="trip" value="Weekly" class="form-check-input">
-                                                <label class="form-check-label" for="weekly">Weekly</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="monthly" name="trip" value="Monthly" class="form-check-input">
-                                                <label class="form-check-label" for="monthly">Monthly</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label class="form-label"><strong>Discount Type:</strong></label>
-                                            <div class="form-check">
-                                                <input type="radio" id="normal" name="discount" value="Normal" checked class="form-check-input">
-                                                <label class="form-check-label" for="normal">Normal</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="senior/child" name="discount" value="Senior/Child" class="form-check-input">
-                                                <label class="form-check-label" for="senior/child">Senior/Child</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="disabled" name="discount" value="Disabled" class="form-check-input">
-                                                <label class="form-check-label" for="disabled">Disabled</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label class="form-label"><strong>Class:</strong></label>
-                                            <div class="form-check">
-                                                <input type="radio" id="Business" name="class" value="Business" checked class="form-check-input">
-                                                <label class="form-check-label" for="Business">Business</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="First" name="class" value="First" class="form-check-input">
-                                                <label class="form-check-label" for="First">First</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="radio" id="Economy" name="class" value="Economy" class="form-check-input">
-                                                <label class="form-check-label" for="Economy">Economy</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button type="submit" class="btn btn-primary me-md-2">Submit</button>
-                                            <a href="reserve.jsp" class="btn btn-secondary">Close</a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <% } %>
-            </div>
+                 </div>
         </div>
     </div>
 
-    <footer class="text-center py-3">&copy; Group 07 Train Reservation System. All Rights Reserved.</footer>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+ <!-- Footer Banner Section -->
+    <div class="footer-banner d-flex justify-content-center align-items-center py-2" style="background-color: #0056b3; color: white; position: fixed; bottom: 0; width: 100%; z-index: 10;">
+        <div class="text-center">
+            <h2>Rutgers Transit</h2>
+            <p>Way to Go</p>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="py-3 bg-light mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 Group 07 Train Reservation System. All Rights Reserved.</p>
+            <p><a href="contact.jsp">Contact Us</a> | <a href="about.jsp">About Us</a></p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (optional for interactive elements) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
 </body>
 </html>
