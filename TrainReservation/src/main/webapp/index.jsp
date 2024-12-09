@@ -2,6 +2,10 @@
 	pageEncoding="ISO-8859-1" import="com.cs527.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+
+<%
+    String username = (String) session.getAttribute("user");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,155 +16,59 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        /* Custom styles for the banner */
-        .banner {
-            background-color: #0056b3;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .navbar {
-            margin-top: 10px;
-        }
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
-        .navbar-nav .nav-link {
-            color: #0056b3 !important;
-        }
+	<link href="css/styles.css" rel="stylesheet">
 
-        .navbar-nav .nav-link:hover {
-            color: #003366 !important;
-        }
-    </style>
 </head>
 <body>
- <div class="banner">
-        <h1>Rutgers Train System</h1>
-    </div>
 
-    <!-- Navigation Menu -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-       <!--      <a class="navbar-brand" href="#">CS527 Group 7</a> -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reserve.jsp">Reserve</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.jsp">Login</a>
-                    </li>
-                </ul>
+    <%@ include file="header.jsp" %>
+
+    <!-- Feature Section -->
+    <div class="container my-5">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="card feature-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Train Reservations</h5>
+                        <p class="card-text">Easily reserve tickets for your next trip.</p>
+                        <a href="reserve.jsp" class="btn btn-primary">Reserve Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Explore Routes</h5>
+                        <p class="card-text">Discover the best routes available for your journey.</p>
+                        <a href="routes.jsp" class="btn btn-primary">Explore Routes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card feature-card">
+                    <div class="card-body">
+                        <% if (username == null) { %>
+                        <h5 class="card-title">Passenger Login</h5>
+                        <p class="card-text">Sign in to access your booking history and more.</p>
+                        <a href="login.jsp" class="btn btn-primary">Login</a>
+                        <% } else { %>
+                        <h5 class="card-title">My Bookings</h5>
+                        <p class="card-text">View your booking history and manage your reservations.</p>
+                        <a href="myBookings.jsp" class="btn btn-primary">View My Bookings</a>
+                        <% } %>  
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
+
+    <!-- Include the footer -->
+    <%@ include file="footer.jsp" %>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-</nav>
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title text-center">Welcome to the Train Reservation System</h3>
-            <form action="fareDisplay.jsp" method="post">
-                <div class="mb-4">
-                    <label for="origin" class="form-label">Select Origin</label>
-                    <select class="form-select" id="origin" name="origin" required>
-                        <option value="">Select Origin</option>
-                        <% 
-                            try {
-                                ApplicationDB db = new ApplicationDB();
-                                Connection con = db.getConnection();
-                                String query = "SELECT tl_name FROM transit_line";
-                                PreparedStatement pstmt = con.prepareStatement(query);
-                                ResultSet rs = pstmt.executeQuery();
-                                while (rs.next()) {
-                                    String station = rs.getString("tl_name");
-                                    out.println("<option value='" + station + "'>" + station + "</option>");
-                                }
-                                rs.close();
-                                pstmt.close();
-                                con.close();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        %>
-                    </select>
-                </div>
-
-                <div class="mb-4">
-                    <label for="destination" class="form-label">Select Destination</label>
-                    <select class="form-select" id="destination" name="destination" required>
-                        <option value="">Select Destination</option>
-                        <% 
-                            try {
-                                ApplicationDB db = new ApplicationDB();
-                                Connection con = db.getConnection();
-                                String query = "SELECT tl_name FROM transit_line";
-                                PreparedStatement pstmt = con.prepareStatement(query);
-                                ResultSet rs = pstmt.executeQuery();
-                                while (rs.next()) {
-                                    String station = rs.getString("tl_name");
-                                    out.println("<option value='" + station + "'>" + station + "</option>");
-                                }
-                                rs.close();
-                                pstmt.close();
-                                con.close();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        %>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="travelDate" class="form-label">Select Date of Travel</label>
-                    <input type="date" class="form-control" id="travelDate" name="travelDate" required>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <%
-        String origin = request.getParameter("origin");
-        String destination = request.getParameter("destination");
-        if (origin != null && destination != null) {
-            try {
-                ApplicationDB db = new ApplicationDB();
-                Connection con = db.getConnection();
-                String fareQuery = "SELECT fare FROM transit_line WHERE tl_name = ?";
-                PreparedStatement pstmt = con.prepareStatement(fareQuery);
-                pstmt.setString(1, origin);
-                ResultSet rs = pstmt.executeQuery();
-                if (rs.next()) {
-                    double fare = rs.getDouble("fare");
-                    out.println("<div class='mt-4 alert alert-info'>Fare: $" + fare + "</div>");
-                } else {
-                    out.println("<div class='mt-4 alert alert-warning'>No fare information available for the selected route.</div>");
-                }
-                rs.close();
-                pstmt.close();
-                con.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-                out.println("<div class='mt-4 alert alert-danger'>An error occurred while retrieving fare information.</div>");
-            }
-        }
-    %>
-</div>
-<footer>&copy; Group 07 Train Reservation System. All Rights Reserved.</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

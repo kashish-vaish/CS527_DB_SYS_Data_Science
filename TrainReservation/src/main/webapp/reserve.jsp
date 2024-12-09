@@ -1,21 +1,34 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.cs527.pkg.*"%>
-<%@ page import="java.io.*,java.util.*,java.sql.*"%>
-<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.cs527.pkg.*" %>
+<%@ page import="java.io.*,java.util.*,java.sql.*" %>
+<%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.text.DateFormat" %>
+
+<%
+    // Check if the user is logged in
+    String username = (String) session.getAttribute("user");
+    if (username == null) {
+        // If not logged in, redirect to login page
+        String referer = request.getRequestURI(); 
+        session.setAttribute("referer", referer);
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rutgers Train System</title>
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
+	
+	<link href="css/styles.css" rel="stylesheet">
+	<style>
         .banner {
             background-color: #0056b3;
             color: white;
@@ -71,37 +84,16 @@
     </style>
 </head>
 <body>
-    <div class="banner">
-        <h1>Rutgers Train System</h1>
-    </div>
+    <%@ include file="header.jsp" %>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reserve.jsp">Reserve</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.jsp">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <!-- Main Content -->
     <div class="container">
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title text-center mb-4">Train Schedule</h3>
-                
+
                 <%
+                    // Retrieve stations and users from the database
                     String personType = (String)session.getAttribute("role");
                     ApplicationDB db = new ApplicationDB();
                     Connection con = db.getConnection();
@@ -112,26 +104,27 @@
                     while (rs.next()) {
                         stations.add(rs.getString("name"));
                     }
-                    
+
                     rs = stmt.executeQuery("Select username from users where role='customer';");
                     ArrayList<String> users = new ArrayList<String>();
                     while (rs.next()) {
                         users.add(rs.getString("username"));
                     }
-                    
+
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     Date date = new Date();
                     db.closeConnection(con);
                 %>
 
+                <!-- Filter Form for Train Search -->
                 <div class="filter-form">
                     <form method="get" action="TrainScheduleBackEnd.jsp" class="row g-3 justify-content-center">
-                        <div class="col-md-3">
+                        <div class="col-12">
                             <input type="date" class="form-control" id="date" name="date" 
                                 min="<%=dateFormat.format(date)%>" 
                                 value="<%= session.getAttribute("date") != null ? session.getAttribute("date") : "" %>">
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-12">
                             <select name="origin" id="origin" class="form-select">
                                 <option disabled <%= session.getAttribute("origin") == null ? "selected" : "" %>>Select Your Origin Station</option>
                                 <% for (String s : stations) {
@@ -142,7 +135,7 @@
                                 <% } %>
                             </select>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-12">
                             <select name="destination" id="destination" class="form-select">
                                 <option disabled <%= session.getAttribute("destination") == null ? "selected" : "" %>>Select Your Destination Station</option>
                                 <% for (String s : stations) {
@@ -154,11 +147,12 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary w-100">Filter</button>
+                            <button type="submit" class="btn btn-primary w-100">Search</button>
                         </div>
                     </form>
                 </div>
 
+                <!-- Display Error or Train Data -->
                 <% if (session.getAttribute("t_error") != null) { %>
                     <div class="alert alert-danger">
                         <%= session.getAttribute("t_error") %>
@@ -191,6 +185,7 @@
                     </div>
                 <% } %>
 
+                <!-- Popup for Ticket Information -->
                 <% if (request.getParameter("fare") != null) { %>
                     <div id="popup1" class="overlay">
                         <div class="popup">
@@ -208,7 +203,8 @@
                                     <p><strong>Origin:</strong> <%= session.getAttribute("origin") %></p>
                                     <p><strong>Destination:</strong> <%= session.getAttribute("destination") %></p>
 
-                                    <form action=TrainScheduleBackEnd.jsp" class="mt-4">
+                                    <!-- Ticket Booking Form -->
+                                    <form action="resBook.jsp" class="mt-4">
                                         <% if (!personType.equals("customer")) { %>
                                             <div class="mb-3">
                                                 <label class="form-label"><strong>Select User:</strong></label>
@@ -274,7 +270,7 @@
 
                                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                             <button type="submit" class="btn btn-primary me-md-2">Submit</button>
-                                            <a href="#" class="btn btn-secondary">Close</a>
+                                            <a href="reserve.jsp" class="btn btn-secondary">Close</a>
                                         </div>
                                     </form>
                                 </div>
@@ -286,7 +282,10 @@
         </div>
     </div>
 
-    <footer class="text-center py-3">&copy; Group 07 Train Reservation System. All Rights Reserved.</footer>
+    <!-- Include the footer -->
+    <%@ include file="footer.jsp" %>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
