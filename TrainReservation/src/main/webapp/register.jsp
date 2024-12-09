@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" import="com.cs527.pkg.*"%>
+<%@ page import="java.io.*,java.util.*,java.sql.*"%>
+<%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +55,7 @@
            outline: none;
            box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
        }
-       .form-group .show-password {
+       .form-group .toggle-password {
            position: absolute;
            right: 10px;
            top: 50%;
@@ -78,17 +80,17 @@
        }
    </style>
    <script>
-       function togglePasswordVisibility(fieldId, iconId) {
-           const passwordField = document.getElementById(fieldId);
-           const toggleIcon = document.getElementById(iconId);
-           if (passwordField.type === 'password') {
-               passwordField.type = 'text';
-               toggleIcon.classList.remove('fa-eye');
-               toggleIcon.classList.add('fa-eye-slash');
+       function togglePasswordVisibility() {
+           const passwordField = document.getElementById("password");
+           const toggleIcon = document.getElementById("togglePasswordIcon");
+           if (passwordField.type === "password") {
+               passwordField.type = "text";
+               toggleIcon.classList.remove("fa-eye");
+               toggleIcon.classList.add("fa-eye-slash");
            } else {
-               passwordField.type = 'password';
-               toggleIcon.classList.remove('fa-eye-slash');
-               toggleIcon.classList.add('fa-eye');
+               passwordField.type = "password";
+               toggleIcon.classList.remove("fa-eye-slash");
+               toggleIcon.classList.add("fa-eye");
            }
        }
    </script>
@@ -96,7 +98,7 @@
 <body>
    <div class="container">
        <h2>Create Account</h2>
-       <form action="registerSuccess.jsp" method="POST">
+       <form method="POST">
            <!-- Username -->
            <div class="form-group">
                <label for="username">Username <span class="required">*</span></label>
@@ -106,7 +108,7 @@
            <div class="form-group">
                <label for="password">Password <span class="required">*</span></label>
                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-               <i id="passwordToggleIcon" class="fas fa-eye show-password" onclick="togglePasswordVisibility('password', 'passwordToggleIcon')"></i>
+               <i id="togglePasswordIcon" class="fas fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
            </div>
            <!-- Email -->
            <div class="form-group">
@@ -150,12 +152,53 @@
            </div>
            <button type="submit" class="btn">Sign Up</button>
        </form>
+
+       <%
+           // Backend handling for registration
+           String username = request.getParameter("username");
+           String password = request.getParameter("password");
+           String email = request.getParameter("email");
+           String fname = request.getParameter("fname");
+           String lname = request.getParameter("lname");
+           String telephone = request.getParameter("telephone");
+           String zipcode = request.getParameter("zipcode");
+           String city = request.getParameter("city");
+           String state = request.getParameter("state");
+           String ssn = request.getParameter("ssn");
+
+           if (username != null && password != null && email != null) {
+               ApplicationDB db = new ApplicationDB();
+               Connection conn = null;
+               PreparedStatement pstmt = null;
+
+               try {
+                   conn = db.getConnection();
+                   String sql = "INSERT INTO users (username, password, email, fname, lname, telephone, zipcode, city, state, ssn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                   pstmt = conn.prepareStatement(sql);
+                   pstmt.setString(1, username);
+                   pstmt.setString(2, password);
+                   pstmt.setString(3, email);
+                   pstmt.setString(4, fname);
+                   pstmt.setString(5, lname);
+                   pstmt.setString(6, telephone);
+                   pstmt.setString(7, zipcode);
+                   pstmt.setString(8, city);
+                   pstmt.setString(9, state);
+                   pstmt.setString(10, ssn);
+                   pstmt.executeUpdate();
+
+                   // Redirect to success page
+                   response.sendRedirect("registerSuccess.jsp");
+               } catch (SQLException e) {
+                   e.printStackTrace();
+                   out.println("<p style='color:red;'>Error: Unable to register user.</p>");
+               } finally {
+                   if (pstmt != null) pstmt.close();
+                   if (conn != null) db.closeConnection(conn);
+               }
+           }
+       %>
    </div>
 </body>
 </html>
-
-
-
-
-
 

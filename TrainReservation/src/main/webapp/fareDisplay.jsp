@@ -5,24 +5,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fare and Route Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Rutgers Train System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-    body { background-color: #f4f4f9; font-family: 'Arial', sans-serif; }
-    .container { margin-top: 50px; }
-    .card { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; margin-top: 20px; }
-    .navbar-brand { font-weight: bold; }
-    footer { background-color: #343a40; color: white; padding: 10px 0; position: fixed; width: 100%; bottom: 0; text-align: center; }
+        /* Custom styles for the banner */
+        .banner {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .navbar {
+            margin-top: 10px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #0056b3 !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #003366 !important;
+        }
     </style>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Train</a>
+	</head>
+	
+	<body>
+	
+	<div class="banner">
+        <h1>Rutgers Train System</h1>
     </div>
-</nav>
+
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+       <!--      <a class="navbar-brand" href="#">CS527 Group 7</a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.jsp">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resPage.jsp">Reserve</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.jsp">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 <div class="container">
     <div class="card">
         <div class="card-body">
@@ -111,7 +154,7 @@
                 }
             %>
             <div class="text-center mt-4">
-                <a href="homepage3.jsp" class="btn btn-primary">Go Back</a>
+                <a href="index.jsp" class="btn btn-primary">Go Back</a>
             </div>
         </div>
     </div>
