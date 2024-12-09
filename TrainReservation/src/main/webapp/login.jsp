@@ -12,38 +12,8 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
+	<link href="css/styles.css" rel="stylesheet">
     <style>
-        /* Custom styles for the banner */
-        .banner {
-            background-color: #0056b3;
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-            background-image: url('https://source.unsplash.com/1600x900/?train,railroad'); /* Example image URL */
-            background-size: cover;
-            background-position: center;
-        }
-
-        .banner h1 {
-            font-family: 'Roboto', sans-serif;
-            font-size: 3rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Navbar Customization */
-        .navbar {
-            margin-top: 10px;
-        }
-
-        .navbar-nav .nav-link {
-            color: #0056b3 !important;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #003366 !important;
-        }
-
         /* Form Styling */
         .login-form {
             max-width: 400px;
@@ -73,56 +43,11 @@
             font-weight: bold;
             margin-top: 20px;
         }
-
-        /* Footer Styles */
-        footer {
-            background-color: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        footer a {
-            color: #0056b3;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Banner Section -->
-    <div class="banner">
-        <h1>Rutgers Train System</h1>
-                <h2>Group 7</h2>
-    </div>
-
-    <!-- Navigation Menu -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reserve.jsp">Reserve</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.jsp">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+      <%@ include file="header.jsp" %>
     <!-- Login Form Section -->
     <div class="login-form">
         <h2>Login</h2>
@@ -145,12 +70,9 @@
         </form>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Group 07 Train Reservation System. All Rights Reserved.</p>
-        <p><a href="contact.jsp">Contact Us</a> | <a href="about.jsp">About Us</a></p>
-    </footer>
-
+    <!-- Include the footer --> 
+    <%@ include file="footer.jsp" %>
+     
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

@@ -67,61 +67,10 @@
             margin-bottom: 30px;
         }
 
-        /* Footer Styles */
-        footer {
-            background-color: #f8f9fa;
-            padding: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        footer a {
-            color: #0056b3;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
-    <!-- Banner Section -->
-    <div class="banner">
-        <h1>Rutgers Train System</h1>
-                <h2>Group 7</h2>
-    </div>
-
-    <!-- Navigation Menu -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="reserve.jsp">Reserve</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.jsp">Login</a>
-                    </li>
-                    <% if (username != null) { %>
-                        <li class="nav-item">
-                            <span class="nav-link">Welcome, <%= username %>!</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="logout.jsp">Logout</a>
-                        </li>
-                    <% } %>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <%@ include file="header.jsp" %>
 
     <!-- About Us Section -->
     <div class="container my-5">
@@ -174,23 +123,8 @@
         </div>
     </div>
 
-    <!-- Footer Banner Section -->
-    <div class="footer-banner d-flex justify-content-center align-items-center py-2" style="background-color: #0056b3; color: white; position: fixed; bottom: 0; width: 100%; z-index: 10;">
-        <div class="text-center">
-            <h2>Rutgers Transit</h2>
-            <p>Way to Go</p>
-        </div>
-    </div>
+      <%@ include file="footer.jsp" %>
 
-    <!-- Footer Section -->
-    <footer class="py-3 bg-light mt-5">
-        <div class="container text-center">
-            <p>&copy; 2024 Group 07 Train Reservation System. All Rights Reserved.</p>
-            <p><a href="contact.jsp">Contact Us</a> | <a href="about.jsp">About Us</a></p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS (optional for interactive elements) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

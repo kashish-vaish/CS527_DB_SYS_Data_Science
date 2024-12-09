@@ -27,73 +27,12 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<link href="css/styles.css" rel="stylesheet">
 
-    <style>
-        .banner {
-            background-color: #0056b3;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .navbar {
-            margin-top: 10px;
-        }
-
-        .navbar-nav .nav-link {
-            color: #0056b3 !important;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #003366 !important;
-        }
-
-        .table th, .table td {
-            text-align: center;
-        }
-
-        .filter-form {
-            padding: 20px;
-        }
-    </style>
 </head>
 <body>
-  <div class="banner">
-    <h1>Rutgers Train System</h1>
-            <h2>Group 7</h2>
-</div>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.jsp">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reserve.jsp">Reserve</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="myBookings.jsp">My Bookings</a>
-                </li>
-            </ul>
-            <!-- Add a flex container to push the username and logout to the right -->
-            <ul class="navbar-nav ms-auto">
-                <% if (username != null) { %>
-                    <li class="nav-item">
-                        <span class="nav-link">Welcome, <%= username %>!</span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.jsp">Logout</a>
-                    </li>
-                <% } %>
-            </ul>
-        </div>
-    </div>
-</nav>
+   <%@ include file="header.jsp" %>
 
 <div class="container">
     <div class="card">
