@@ -2,6 +2,12 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <%@ page import="java.util.ArrayList" %><!DOCTYPE html>
+
+<%
+
+    String referer = (String) session.getAttribute("referer");
+String refererroute = (String) session.getAttribute("refererroute");
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -157,8 +163,22 @@
 	<br>
 	<br>
 	<div style="display: flex; justify-content:center;" >
-	<button><a href="TrainScheduleBackEnd.jsp">Back to Schedules</a></button>
+	<%
+	if (refererroute != null && refererroute.equalsIgnoreCase("/TrainReservation/routes.jsp")) {
+	%>
+		<button><a href="routes.jsp">Back to Schedules</a></button>
+	<%
+	} else  {
+	%>
+		<button><a href="reserve.jsp">Back to Schedules</a></button>
+	<% }; %>	
+	
+	
 	</div>
+ <!-- Include the footer --> 
+    <%@ include file="footer.jsp" %>
 
+    <!-- Bootstrap JS (optional for interactive elements) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -42,6 +42,21 @@ public class TrainScheduleObject {
 		
 		return html;
 	}
+	public String getDataRoutes(String personType) {
+		String html = "<td style=\"border: 1px solid black;\">" 
+				+"<a href='stations.jsp?transit="+transitLine+"&num="+scheduleNum+"'>"+ transitLine + "</a></td>"+
+				"<td style=\"border: 1px solid black;\">#" + scheduleNum + "</td>"+
+				"<td style=\"border: 1px solid black;\">" + departure + "</td>"+
+				"<td style=\"border: 1px solid black;\">" + arrival + "</td>"+
+				"<td style=\"border: 1px solid black;\">" + start + "</td>"+
+				"<td style=\"border: 1px solid black;\">"+ end + "</td>"+
+				"<td style=\"border: 1px solid black;\">" + travelTime + "</td>"+
+				"<td style=\"border: 1px solid black;\">" + "$"+ cost + "</td>";
+
+	
+		
+		return html;
+	}
 	public String getBrowseData() {
 		String html = "<td style=\"border: 1px solid black;\">"+ transitLine + "</td>"+
 				"<td style=\"border: 1px solid black;\">#" + scheduleNum + "</td>"+
