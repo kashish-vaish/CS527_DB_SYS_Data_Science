@@ -36,7 +36,7 @@
            
 	             System.out.println("Username: " + rs.getString("username"));
 				System.out.println("User's Role: " + rs.getString("role"));
-					
+					String role =rs.getString("role");
 					//storing information into session
 			        session.setAttribute("user", rs.getString("username"));
 			        session.setAttribute("role", rs.getString("role"));
@@ -73,9 +73,15 @@
 	                    // If a referer URL exists, redirect the user back to that page (e.g., reserve.jsp)
 	                    session.removeAttribute("referer"); // Optionally remove the referer after redirecting
 	                    response.sendRedirect(referer);
-	                } else {
+	                    System.out.println("I am here in the referer world, kv");
+	                } else if (referer == null && role.equalsIgnoreCase("administrator")) {
 	                    // If no referer URL exists, redirect to the home page
-	                    response.sendRedirect("index.jsp");
+	                    System.out.println("I am here in the admin world, kv");
+	                    response.sendRedirect("customer_rep_dashboard.jsp");
+	                }
+	                else{
+	                    System.out.println("I am here in the else world, kv");
+	                	 response.sendRedirect("index.jsp");
 	                }
 
 

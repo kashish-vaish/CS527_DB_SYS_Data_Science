@@ -7,8 +7,8 @@
 <%@ page import="java.text.DateFormat" %>
 <%
     String username = (String) session.getAttribute("user");
-String referer = request.getRequestURI(); 
-session.setAttribute("referer", referer);
+String refererroute = request.getRequestURI(); 
+session.setAttribute("refererroute", refererroute);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -196,7 +196,7 @@ session.setAttribute("referer", referer);
                             <tbody>
                                 <% for (TrainScheduleObject t: (ArrayList<TrainScheduleObject>)session.getAttribute("data")) { %>
                                     <tr>
-                                        <%= t.getData(personType) %>
+                                        <%= t.getDataRoutes(personType)%>
                                     </tr>
                                 <% } %>
                             </tbody>
@@ -208,21 +208,8 @@ session.setAttribute("referer", referer);
         </div>
     </div>
 
- <!-- Footer Banner Section -->
-    <div class="footer-banner d-flex justify-content-center align-items-center py-2" style="background-color: #0056b3; color: white; position: fixed; bottom: 0; width: 100%; z-index: 10;">
-        <div class="text-center">
-            <h2>Rutgers Transit</h2>
-            <p>Way to Go</p>
-        </div>
-    </div>
-
-    <!-- Footer Section -->
-    <footer class="py-3 bg-light mt-5">
-        <div class="container text-center">
-            <p>&copy; 2024 Group 07 Train Reservation System. All Rights Reserved.</p>
-            <p><a href="contact.jsp">Contact Us</a> | <a href="about.jsp">About Us</a></p>
-        </div>
-    </footer>
+    <!-- Include the footer --> 
+    <%@ include file="footer.jsp" %>
 
     <!-- Bootstrap JS (optional for interactive elements) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

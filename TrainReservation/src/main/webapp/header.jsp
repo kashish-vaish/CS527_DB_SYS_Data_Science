@@ -11,12 +11,32 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+             <% 
+                    String role = (String) session.getAttribute("role"); 
+             System.out.println("I am in header");
+             System.out.println(role);
+                    if (role != null && role.equalsIgnoreCase("administrator")) {System.out.println(role);
+                %>
                 <li class="nav-item">
+                    <a class="nav-link" href="customer_rep_dashboard.jsp">Home</a>
+                </li>
+                           <% } else {%>
+                           
+                            <li class="nav-item">
                     <a class="nav-link" href="index.jsp">Home</a>
                 </li>
+              <% }%> 
                 <li class="nav-item">
                     <a class="nav-link" href="reserve.jsp">Reserve</a>
                 </li>
+                <% 
+                    String userreg = (String) session.getAttribute("user"); 
+                    if (userreg == null) {
+                %>
+                <li class="nav-item">
+                    <a class="nav-link" href="register.jsp">Register</a>
+                </li>
+                <% } %>
             </ul>
             <!-- Add a flex container to push the username and logout to the right -->
             <ul class="navbar-nav ms-auto"> <!-- ms-auto is equivalent to ml-auto in Bootstrap 5 -->

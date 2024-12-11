@@ -17,7 +17,7 @@
         /* Form Styling */
         .login-form {
             max-width: 400px;
-            margin: 50px auto;
+            margin: 30px auto;
             background-color: #f8f9fa;
             padding: 30px;
             border-radius: 8px;
@@ -42,6 +42,14 @@
             text-align: center;
             font-weight: bold;
             margin-top: 20px;
+        }
+                .signup-message {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-message a {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -68,6 +76,10 @@
                 </div>
             <% } %>
         </form>
+         <!-- Sign Up Prompt -->
+        <div class="signup-message">
+            <p>Don't have an account yet? <a href="register.jsp">Sign Up</a></p>
+        </div>
     </div>
 
     <!-- Include the footer --> 
